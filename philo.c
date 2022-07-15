@@ -6,39 +6,39 @@
 /*   By: cbourajl <cbourajl@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 17:48:40 by cbourajl          #+#    #+#             */
-/*   Updated: 2022/07/14 14:19:33 by cbourajl         ###   ########.fr       */
+/*   Updated: 2022/07/15 14:24:49 by cbourajl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int test = 0;
-pthread_mutex_t        mutex;
-
-void    *philo()
+void    *philo_thread()
 {
-    for (int i = 0; i < 1000000; i++)
-    {
-        pthread_mutex_lock(&mutex);
-        test++;
-        pthread_mutex_unlock(&mutex);
-    }
+    void    *ret;
+    ret = NULL;
+    printf("a philo is born\n");
+    return (ret);
 }
 
 int main(int ac, char **av)
 {
-    pthread_t   th[100];
-    int         i;
-    pthread_mutex_init(&mutex, NULL);
-    for (i = 0; i < 100; i++)
+    t_philo *philo;
+    int     i;
+
+    i = 1;
+    philo = malloc(sizeof(t_philo));
+    philo_init(philo);
+    if (!check_args(ac, av, philo))
+        return (0);
+    while (i <= philo->info->nb_philo)
     {
-        pthread_create(th + i, NULL, &philo, NULL);
-        printf("philo %d is born\n", i);
+        pthread_create(&philo->philo, NULL, philo_thread, NULL);
+        i++;
     }
-    for (i = 0; i < 100; i++){
-        pthread_join(th[i], NULL);
-        printf("philo %d is dead\n", i);
+    i = 1;
+    while (i <= philo->info->nb_philo)
+    {
+        pthread_join(philo->philo, NULL);
+        i++;
     }
-    pthread_mutex_destroy(&mutex);
-    printf("%d\n", test);
 }
