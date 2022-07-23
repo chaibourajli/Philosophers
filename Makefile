@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS = philo.c utils.c
+SRCS = philo.c utils.c time.c death.c routine.c
 
 OBJS = $(SRCS:.c=.o)
 NAME = philo
@@ -12,7 +12,7 @@ HEADER = philo.h
 
 ${NAME}: ${OBJS}
 	@$(CC) $(CFLAGS) $^ -o $@ -I $(HEADER)
-	@echo "COMPILATION SUCCESSFUL RBK"
+	@echo "COMPILATION SUCCESSFUL"
 
 all: ${NAME}
 

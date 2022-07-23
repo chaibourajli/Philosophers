@@ -1,0 +1,12 @@
+make --dry-run --keep-going --print-directory
+make: Entering directory `/Users/cbourajl/Desktop/philosophers'
+gcc -Wall -Wextra -Werror -c philo.c -I philo.h
+ 
+gcc -Wall -Wextra -Werror -c utils.c -I philo.h
+gcc -Wall -Wextra -Werror -c time.c -I philo.h
+gcc -Wall -Wextra -Werror -c death.c -I philo.h
+gcc -Wall -Wextra -Werror -c routine.c -I philo.h
+gcc -Wall -Wextra -Werror philo.o utils.o time.o death.o routine.o -o philo -I philo.h
+echo "COMPILATION SUCCESSFUL"
+make: Leaving directory `/Users/cbourajl/Desktop/philosophers'
+ 
